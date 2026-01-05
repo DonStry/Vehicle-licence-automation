@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vehicle Details</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    .msg {
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #f5f5f5;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Step 2: Vehicle Details</h2>
+
+  <div class="card">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="msg">
+          {% for message in messages %}
+            <div>{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- IMPORTANT: This submits to the /vehicle Python route -->
+    <form method="post" action="{{ url_for('vehicle') }}">
+
+      <label>Make</label>
+      <input
+        type="text"
+        name="Make"
+        value="{{ data.get('Make', '') }}"
+        required
+      >
+
+      <label>Series</label>
+      <input
+        type="text"
+        name="series"
+        value="{{ data.get('series', '') }}"
+        required
+      >
+
+      <label>Register Number</label>
+      <input
+        type="text"
+        name="register_number"
+        value="{{ data.get('register_number', '') }}"
+        required
+      >
+
+      <label>Vehicle licence number</label>
+      <input
+        type="text"
+        name="vehicle_licence_number"
+        value="{{ data.get('vehicle_licence_number', '') }}"
+        required
+      >
+
+      <label>VIN</label>
+      <input
+        type="text"
+        name="vin"
+        value="{{ data.get('vin', '') }}"
+        required
+      >
+
+      <button type="submit">Save</button>
+
+    </form>
+
+    <a href="{{ url_for('start') }}">Back to Start</a>
+
+  </div>
+    record = build_record_from_session()
+    append_record_to_jsonl(record)
+
+# If transaction is Vehicle licensing, fill ALV
+if record.get("transaction_type") == "Vehicle licensing":
+    template_pdf = "pdf_templates/ALV_form.pdf"
+    safe_ts = record["created_at"].replace(":", "-")
+    out_name = f"ALV_filled_{safe_ts}.pdf"
+    out_path = os.path.join("generated_forms", out_name)
+
+    alv_fields = build_alv_fields(record)
+    fill_acroform_pdf(template_pdf, out_path, alv_fields)
+
+    # store filename so we can download it
+    session["last_pdf"] = out_name
+
+
+</body>
+</html>

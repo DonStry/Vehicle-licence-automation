@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Start</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; max-width: 700px; margin: 0 auto; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 16px; }
+    label { display:block; margin-top: 10px; font-weight: bold; }
+    select { width: 100%; padding: 10px; margin-top: 6px; box-sizing: border-box; }
+    button { margin-top: 14px; padding: 10px 14px; cursor: pointer; }
+    .msg { margin: 10px 0; padding: 10px; border-radius: 8px; background: #f5f5f5; }
+  </style>
+</head>
+<body>
+  <h2>Step 0: Start</h2>
+
+  <div class="card">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="msg">
+          {% for m in messages %}
+            <div>{{ m }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post">
+      <label>What type of transaction?</label>
+      <select name="transaction_type" required>
+        <option value="">Select one...</option>
+        {% for t in transactions %}
+          <option value="{{ t }}" {% if data.get('transaction_type') == t %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Are you a private person or a company?</label>
+      <select name="customer_type" required>
+        <option value="">Select one...</option>
+        {% for c in customers %}
+          <option value="{{ c }}" {% if data.get('customer_type') == c %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Next</button>
+    </form>
+  </div>
+</body>
+</html>

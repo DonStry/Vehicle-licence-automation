@@ -1,0 +1,19 @@
+--- 2026-01-05 10:13:48 ---
+Transaction type: Vehicle licensing
+Customer type: Private person
+
+PERSONAL DETAILS
+Name: DonTest
+Surname: Testdon
+ID Number: 45616586413244
+Address: Test address
+Cellphone number: 052451451452
+Email: 1@1.com
+
+VEHICLE DETAILS
+Brand: asdasd
+Type: asfdasfa
+Register Number: asfsdgds
+Vehicle licence number: sdfsdgdsh
+VIN: sdgdfnfdhsfhfdhd
+
