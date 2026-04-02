@@ -1,15 +1,17 @@
-# Python-License
-
-Vehicle licensing app built with Python and Streamlit.
+ Vehicle License Automation
 
 ## Overview
-This project helps automate parts of the vehicle licensing process by collecting user details, generating supporting documents, and handling PDF workflows.
+A Python-based application designed to automate parts of the vehicle licensing process, including form completion and document generation.
+
+---
 
 ## Features
-- Streamlit-based interface
-- PDF generation and merging
-- Permission letter creation
-- Form automation workflow
+- Streamlit-based user interface
+- Automated PDF generation
+- Document handling and form workflows
+- Data input and processing
+
+---
 
 ## Tech Stack
 - Python
@@ -18,10 +20,10 @@ This project helps automate parts of the vehicle licensing process by collecting
 - ReportLab
 - python-docx
 
-## Files
-- `app.py` – main application logic
-- `requirements.txt` – dependencies
-- `forms/` – supporting files and templates
+---
 
-## Why I Built It
-I wanted to solve a real admin-heavy problem by building a practical Python application that reduces manual form work.
+## What This Project Demonstrates
+- Building real-world automation tools
+- Working with document generation
+- Backend logic and workflows
+- Problem-solving in admin-heavy processes
